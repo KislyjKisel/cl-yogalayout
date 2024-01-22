@@ -1,0 +1,22 @@
+(defpackage #:yogalayout/tests (:use #:cl #:parachute))
+(in-package #:yogalayout/tests)
+
+(define-test node-child
+  (float-features:with-float-traps-masked t
+    (let ((root (yogalayout:node-new))
+          (root-child0 (yogalayout:node-new)))
+      (yogalayout:node-style-set-width root-child0 100.0)
+      (yogalayout:node-style-set-height root-child0 100.0)
+      (yogalayout:node-insert-child root root-child0 0)
+      (yogalayout:node-calculate-layout root yogalayout:+undefined+ yogalayout:+undefined+ yogalayout:+direction-ltr+)
+      (is = 0.0 (yogalayout:node-layout-get-left root-child0))
+      (is = 0.0 (yogalayout:node-layout-get-top root-child0))
+      (is = 100.0 (yogalayout:node-layout-get-width root-child0))
+      (is = 100.0 (yogalayout:node-layout-get-height root-child0))
+      (yogalayout:node-remove-child root root-child0)
+      (is = 0.0 (yogalayout:node-layout-get-left root-child0))
+      (is = 0.0 (yogalayout:node-layout-get-top root-child0))
+      (true (yogalayout:float-is-undefined (yogalayout:node-layout-get-width root-child0)))
+      (true (yogalayout:float-is-undefined (yogalayout:node-layout-get-height root-child0)))
+      (yogalayout:node-free-recursive root)
+      (yogalayout:node-free-recursive root-child0))))
