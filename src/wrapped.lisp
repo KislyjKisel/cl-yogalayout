@@ -24,7 +24,6 @@
   %yg:config-set-experimental-feature-enabled
   %yg:config-is-experimental-feature-enabled
   %yg:config-set-clone-node-func
-  %yg:config-set-print-tree-flag
   ;; <yoga/YGEnums.h>
   %yg:align
   %yg:+align-auto+
@@ -35,7 +34,7 @@
   %yg:+align-baseline+
   %yg:+align-space-between+
   %yg:+align-space-around+
-  ; %yg:+align-space-evenly+
+  %yg:+align-space-evenly+
   %yg:dimension
   %yg:+dimension-width+
   %yg:+dimension-height+
@@ -58,6 +57,8 @@
   %yg:+edge-all+
   %yg:+errata-none+
   %yg:+errata-stretch-flex-basis+
+  %yg:+errata-absolute-positioning-incorrect+
+  %yg:+errata-absolute-percent-against-inner-size+
   %yg:+errata-all+
   %yg:+errata-classic+
   %yg:experimental-feature
@@ -100,9 +101,6 @@
   %yg:+position-type-static+
   %yg:+position-type-relative+
   %yg:+position-type-absolute+
-  %yg:+print-options-layout+
-  %yg:+print-options-style+
-  %yg:+print-options-children+
   %yg:unit
   %yg:+unit-undefined+
   %yg:+unit-point+
@@ -151,7 +149,8 @@
   %yg:node-is-reference-baseline
   %yg:node-set-node-type
   %yg:node-get-node-type
-  ; %yg:node-set-always-forms-containing-block
+  %yg:node-set-always-forms-containing-block
+  %yg:node-get-always-forms-containing-block
   ;; <yoga/YGNodeLayout.h>
   %yg:node-layout-get-left
   %yg:node-layout-get-top
@@ -249,9 +248,6 @@
 (export 'config-set-errata)
 (defun config-set-errata (config &rest errata)
   (%yg:config-set-errata config (autowrap:mask-apply 'errata errata)))
-
-(export 'print-options)
-(autowrap:define-bitmask-from-enum (print-options %yg:print-options)) ; "YGNodePrint" not exported
 
 (export 'float-is-undefined)
 (declaim (inline float-is-undefined))
