@@ -14,4 +14,7 @@
     :symbol-regex (("^YG_(.*)" () "\\1")
                    ("^YG(.*)" () "\\1"))
     :symbol-exceptions ()
-    :exclude-definitions ("^_[A-Z]"))
+    :exclude-definitions ("^_[A-Z]"
+                          "__gnuc_va_list"
+                          "va_list"
+                          "max_align_t"))
